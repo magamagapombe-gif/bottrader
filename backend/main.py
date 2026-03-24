@@ -1,5 +1,6 @@
 import os
 import uuid
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
@@ -9,7 +10,13 @@ from pydantic import BaseModel
 from supabase import create_client, Client
 
 app = FastAPI(title="SuperEye API")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://bottrader-iota.vercel.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
